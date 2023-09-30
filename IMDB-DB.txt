@@ -1,0 +1,242 @@
+1. Movies Should have Multiple Media :
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+## Creating TABLE Movies
+
+CREATE TABLE Movies
+(ID integer PRIMARY KEY,NAME text);
+
+## Inserting Values
+
+INSERT INTO Movies
+(id,name)
+VALUES
+(1,"Comali"),
+(2,"Nanban"),
+(3,"Inidhu Inidhu"),
+(4,"Sakthi"),
+(5,"Veeram");
+
+➡️ SELECT * FROM Movies;
+
+<!------------------------------------------------------------------------->
+
+## Creating TABLE VIDEO
+
+CREATE TABLE VIDEO
+(ID integer PRIMARY KEY,VIDEO_URL text);
+
+## Inserting Values
+
+INSERT INTO VIDEO
+(ID,VIDEO_URL)
+VALUES (1,"https://www.youtube.com/watch?v=EkWJEBxzYb0"),
+(2,"https://www.youtube.com/watch?v=6TzbI61wVjw"),
+(3,"https://www.youtube.com/watch?v=EkWJEBxzYb0"),
+(4,"https://www.youtube.com/watch?v=6TzbI61wVjw"),
+(5,"https://www.youtube.com/watch?v=Lse_j6T0TIE");
+
+➡️ SELECT * FROM VIDEO;
+
+<!------------------------------------------------------------------------->
+
+## Creating TABLE IMAGE
+
+CREATE TABLE IMAGE
+(ID integer PRIMARY KEY,IMG_URL text);
+
+## Inserting Values
+
+INSERT INTO IMAGE
+(ID,IMG_URL)
+VALUES
+(1,"https://upload.wikimedia.org/wikipedia/en/a/a4/Comali_poster.jpg"),
+(2,"https://upload.wikimedia.org/wikipedia/en/a/a0/Nanban_2012_poster.jpg"),
+(3,"https://upload.wikimedia.org/wikipedia/en/thumb/6/61/Inidhu_Inidhu.jpg/220px-Inidhu_Inidhu.jpg"),
+(4,"https://upload.wikimedia.org/wikipedia/en/8/88/Shakti_Movie_Poster.jpg"),
+(5,"https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Veeram_2014_poster.jpg/220px-Veeram_2014_poster.jpg");
+
+➡️ SELECT * FROM IMAGE;
+
+<!------------------------------------------------------------------------->
+
+## JOIN THE TABLES :-
+
+SELECT MOVIES.ID,NAME,IMG_URL,VIDEO_URL
+FROM Movies
+INNER JOIN VIDEO
+ON Movies.ID=VIDEO.ID
+INNER JOIN IMAGE
+ON Movies.ID=IMAGE.ID;
+
+<!------------------------------------------------------------------------->
+
+2. Movie can belong to multiple GENERE
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Creating TABLE GENERE
+
+CREATE TABLE GENERE
+(ID integer PRIMARY KEY,GENERE_TYPE text);
+
+## Inserting Values
+
+INSERT INTO GENERE
+(ID,GENERE_TYPE)
+VALUES
+(1,"Action"),
+(2,"Comedy"),
+(3,"Fantasy"),
+(4,"Friends"),
+(5,"Crime");
+
+➡️ SELECT * FROM GENERE;
+
+<!------------------------------------------------------------------------->
+
+## JOIN THE TABLES :-
+
+SELECT MOVIES.ID,NAME,GENERE_TYPE
+FROM Movies
+INNER JOIN GENERE
+ON Movies.ID=GENERE.ID
+
+<!------------------------------------------------------------------------->
+
+3.Movie can have multiple reviews and reviews can belong to multiple users
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Creating TABLE REVIEW
+
+CREATE TABLE REVIEW
+(ID integer PRIMARY KEY,USER_REVIEW text);
+
+## Inserting Values
+
+INSERT INTO REVIEW
+(ID,USER_REVIEW)
+VALUES
+(1,"excellent"),
+(2,"good"),
+(3,"poor"),
+(4,"Average"),
+(5,"Awesome");
+
+➡️ SELECT * FROM REVIEW;
+
+<!------------------------------------------------------------------------->
+
+## Creating TABLE USERS
+
+CREATE TABLE USERS
+(ID integer PRIMARY KEY,NO_OF_USERS text);
+
+## Inserting Values
+
+INSERT INTO USERS
+(ID,NO_OF_USERS)
+VALUES
+(1,"User-1"),
+(2,"User-2"),
+(3,"User-3"),
+(4,"User-4"),
+(5,"User-5");
+
+➡️ SELECT * FROM USERS;
+
+<!------------------------------------------------------------------------->
+
+## JOIN THE TABLES :-
+
+SELECT MOVIES.ID,NAME,NO_OF_USERS,USER_REVIEW
+FROM Movies
+INNER JOIN USERS
+ON Movies.ID=USERS.ID
+INNER JOIN REVIEW
+ON Movies.ID=REVIEW.ID;
+
+<!------------------------------------------------------------------------->
+
+4.Artist can have multiple skills
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Creating TABLE ARTISTS
+
+CREATE TABLE ARTISTS
+(ID integer PRIMARY KEY,ARTIST_NAME text);
+
+## Inserting Values
+
+INSERT INTO ARTISTS
+(ID,ARTIST_NAME)
+VALUES
+(1,"Jayamravi"),
+(2,"vijay"),
+(3,"Arun"),
+(4,"Rama rao"),
+(5,"Ajith");
+
+➡️ SELECT * FROM ARTISTS;
+
+<!------------------------------------------------------------------------->
+
+## Creating ARTISTS_SKILLS
+
+CREATE TABLE ARTISTS_SKILLS
+(ID integer PRIMARY KEY,SKILLS text);
+
+## Inserting Values
+
+INSERT INTO ARTISTS_SKILLS
+(ID,SKILLS)
+VALUES
+(1,"Actor"),
+(2,"director"),
+(3,"Producer"),
+(4,"singer"),
+(5,"writter");
+
+➡️ SELECT * FROM ARTISTS_SKILLS;
+
+<!------------------------------------------------------------------------->
+
+## JOIN THE TABLES :-
+
+SELECT MOVIES.ID,NAME,ARTIST_NAME,SKILLS
+FROM Movies
+INNER JOIN ARTISTS
+ON Movies.ID=ARTISTS.ID
+INNER JOIN ARTISTS_SKILLS
+ON Movies.ID=ARTISTS_SKILLS.ID;
+
+<!------------------------------------------------------------------------->
+
+5.Artist can perform multiple roles in a single flim
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Creating ARTISTS_ROLE
+
+CREATE TABLE ARTISTS_ROLE
+(ID integer PRIMARY KEY,ROLE text);
+
+## Inserting Values
+
+INSERT INTO ARTISTS_ROLE
+(ID,ROLE)
+VALUES
+(1,"A Dual Role"),
+(2,"double-casting"),
+(3,"Series regular"),
+(4,"Recurring character"),
+(5,"Method Acting");
+
+➡️ SELECT * FROM ARTISTS_ROLE;
+
+<!------------------------------------------------------------------------->
+
+## JOIN THE TABLES :-
+
+SELECT MOVIES.ID,NAME,ARTIST_NAME,ROLE
+FROM Movies
+INNER JOIN ARTISTS
+ON Movies.ID=ARTISTS.ID
+INNER JOIN ARTISTS_ROLE
+ON Movies.ID=ARTISTS_ROLE.ID
+
+<!------------------------------------------------------------------------->
